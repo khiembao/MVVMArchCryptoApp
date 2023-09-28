@@ -1,4 +1,4 @@
-package com.baokhiem.mvvmarchcryptoapp.ui.theme
+package com.baokhiem.mvvmarchcryptoapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
