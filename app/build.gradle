@@ -20,6 +20,9 @@ android {
             useSupportLibrary true
         }
     }
+    buildFeatures{
+        viewBinding true
+    }
 
     buildTypes {
         release {
@@ -76,5 +79,10 @@ dependencies {
 
     //dagger hilt (dependency injection)
     implementation 'com.google.dagger:hilt-android:2.44'
+
+    //NavController
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.3'
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-alpha02'
 
 }
