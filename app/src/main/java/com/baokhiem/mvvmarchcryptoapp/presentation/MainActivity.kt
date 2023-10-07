@@ -10,8 +10,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.baokhiem.mvvmarchcryptoapp.presentation.coin_detail.CoinDetailScreen
+import com.baokhiem.mvvmarchcryptoapp.presentation.coin_list.components.CoinListItem
+import com.baokhiem.mvvmarchcryptoapp.presentation.coin_list.components.CoinListScreen
 import com.baokhiem.mvvmarchcryptoapp.presentation.ui.theme.MVVMArchCryptoAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +30,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    val navController  = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.CoinListScreen.route
+                    ){
+                        composable(
+                            route = Screen.CoinListScreen.route
+                        ){
+                            CoinListScreen(navController)
+                        }
+                        composable(
+                            route = Screen.CoinDetailScreen.route + "/{coinId}"
+                        ){
+                            CoinDetailScreen()
+                        }
+                    }
                 }
             }
         }

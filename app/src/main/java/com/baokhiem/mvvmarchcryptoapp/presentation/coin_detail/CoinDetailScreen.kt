@@ -2,6 +2,7 @@ package com.baokhiem.mvvmarchcryptoapp.presentation.coin_detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,13 +28,16 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
+import com.baokhiem.mvvmarchcryptoapp.data.remote.dto.TeamMember
 import com.baokhiem.mvvmarchcryptoapp.presentation.Screen
+import com.baokhiem.mvvmarchcryptoapp.presentation.coin_detail.components.CoinTag
+import com.baokhiem.mvvmarchcryptoapp.presentation.coin_detail.components.TeamListItem
 import com.baokhiem.mvvmarchcryptoapp.presentation.coin_list.CoinListViewModel
 import dagger.hilt.processor.internal.definecomponent.codegen._dagger_hilt_android_internal_builders_ViewModelComponentBuilder
 
 
 @Composable
-fun CoinListScreen(
+fun CoinDetailScreen(
     viewModel: CoinDetailViewModel = hiltViewModel()
 ){
     val state = viewModel.state.value
@@ -64,10 +69,40 @@ fun CoinListScreen(
                     }
                     Spacer(modifier = Modifier.height(15.dp))
                     Text(
-                        text = coin.description
+                        text = coin.description,
+                        style = MaterialTheme.typography.bodyMedium
                     )
+                    Spacer(modifier = Modifier.height(15.dp))
+                    Text(
+                        text = "Tags",
+                        style = MaterialTheme.typography.headlineLarge
+                    )
+                    Spacer(modifier = Modifier.height(15.dp))
+                    com.google.accompanist.flowlayout.FlowRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        crossAxisSpacing = 10.dp,
+                        mainAxisSpacing = 10.dp
+                    ) {
+                        coin.tags.forEach { tag ->
+                            CoinTag(tag = tag)
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(15.dp))
+                    Text(
+                        text = "Team members",
+                        style = MaterialTheme.typography.headlineLarge
+                    )
+                    Spacer(modifier = Modifier.height(15.dp))
                 }
-
+                items(coin.team){ teamMember ->
+                    TeamListItem(
+                        teamMember = teamMember,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(10.dp)
+                    )
+                    Divider()
+                }
             }
             if (state.error.isNotBlank()){
                 Text(

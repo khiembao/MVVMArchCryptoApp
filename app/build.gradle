@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.baokhiem.mvvmarchcryptoapp'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.baokhiem.mvvmarchcryptoapp"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -85,4 +85,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.3'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-alpha02'
 
+    //more Compose implementation
+    implementation 'com.google.accompanist:accompanist-flowlayout:0.17.0'
 }
